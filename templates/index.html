@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>{{ title }}</title>
+
+    <meta name="title" content="Calcula los Recursos de VPS de ETECSA: Ofrecemos la Mejor Solución para tu Proyecto.">
+    <meta name="description" content="Descubre los mejores recursos de VPS de ETECSA con nuestro calculador. Obtén una descripción precisa y detallada de los recursos que necesitas para tu proyecto sin importar el tamaño. Nuestro calculador de recursos de VPS te ayudará a elegir la mejor solución para tus necesidades. ¡Empieza ahora!" >
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="autor" content="Brian Martínez Rodríguez" >
+    <meta name="robots" content="index, follow">
+    <meta name="msapplication-TileColor" content="#0f172a">
+    <meta name="theme-color" content="#0f172a">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://calcularvps.webdev.cu">
+    <meta property="og:title" content="Calcula los Recursos de VPS de ETECSA: Ofrecemos la Mejor Solución para tu Proyecto.">
+    <meta property="og:description" content="Descubre los mejores recursos de VPS de ETECSA con nuestro calculador. Obtén una descripción precisa y detallada de los recursos que necesitas para tu proyecto sin importar el tamaño. Nuestro calculador de recursos de VPS te ayudará a elegir la mejor solución para tus necesidades. ¡Empieza ahora!">
+    <meta property="og:image" itemprop="image"content="/static/img/calculadoravps-preview.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://calcularvps.webdev.cu">
+    <meta property="twitter:title" content="Calcula los Recursos de VPS de ETECSA: Ofrecemos la Mejor Solución para tu Proyecto.">
+    <meta property="twitter:description" content="Descubre los mejores recursos de VPS de ETECSA con nuestro calculador. Obtén una descripción precisa y detallada de los recursos que necesitas para tu proyecto sin importar el tamaño. Nuestro calculador de recursos de VPS te ayudará a elegir la mejor solución para tus necesidades. ¡Empieza ahora!">
+    <meta property="twitter:image" content="/static/img/calculadoravps-preview.jpg">
+    
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <a href="https://webdev.cu" class="logo" target="_blank" rel="noopener">Webdev</a>
+        <p>Calculadora de Recursos</p>
+    </header>
+
+    <main>
+        <h1 class="title">Calculadora de Precios VPS de ETECSA</h1>
+        <p class="subtitle">Utiliza nuestra calculadora de precios para conocer un costo aproximado de tu consumo de recursos</p>
+        <form id="form-calcular" class="form-inline" action="{% url 'public:calcular_precio' %}" method="post">
+            {% csrf_token %}
+            <div class="single-select">
+                <select name="cpu" id="cpu" onChange="calcularPrecio();">
+                    <option selected  value="">CPU</option>
+                    {%for cpu in limit_cpu %}
+                        <option value="{{ cpu }}">{{ cpu }}</option>
+                    {% endfor %}                    
+                </select>
+                <i>
+                    <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M20 9.6C20 5.6 18.4 4 14.4 4H9.6C5.6 4 4 5.6 4 9.6V14.4C4 18.4 5.6 20 9.6 20" stroke="#cbd5ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16.35 8C15.8 7.3 14.88 7 13.5 7H10.5C8 7 7 8 7 10.5V13.5C7 14.88 7.3 15.8 7.99 16.35" stroke="#cbd5ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M8.01001 4V2" stroke="#cbd5ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M12 4V2" stroke="#cbd5ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16 4V2" stroke="#cbd5ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M20 8H22" stroke="#cbd5ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M8.01001 20V22" stroke="#cbd5ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M2 8H4" stroke="#cbd5ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M2 12H4" stroke="#cbd5ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M2 16H4" stroke="#cbd5ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16.71 18.59C17.5881 18.59 18.3 17.8782 18.3 17C18.3 16.1219 17.5881 15.41 16.71 15.41C15.8319 15.41 15.12 16.1219 15.12 17C15.12 17.8782 15.8319 18.59 16.71 18.59Z" stroke="#cbd5ff" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M11.41 17.46V16.53C11.41 15.98 11.86 15.53 12.41 15.53C13.37 15.53 13.76 14.85 13.28 14.02C13 13.54 13.17 12.92 13.65 12.65L14.56 12.12C14.98 11.87 15.52 12.02 15.77 12.44L15.83 12.54C16.31 13.37 17.09 13.37 17.57 12.54L17.63 12.44C17.88 12.02 18.42 11.88 18.84 12.12L19.75 12.65C20.23 12.93 20.4 13.54 20.12 14.02C19.64 14.85 20.03 15.53 20.99 15.53C21.54 15.53 21.99 15.98 21.99 16.53V17.46C21.99 18.01 21.54 18.46 20.99 18.46C20.03 18.46 19.64 19.14 20.12 19.97C20.4 20.45 20.23 21.07 19.75 21.34L18.84 21.87C18.42 22.12 17.88 21.97 17.63 21.55L17.57 21.45C17.09 20.62 16.31 20.62 15.83 21.45L15.77 21.55C15.52 21.97 14.98 22.11 14.56 21.87L13.65 21.34C13.17 21.06 13 20.45 13.28 19.97C13.76 19.14 13.37 18.46 12.41 18.46C11.86 18.47 11.41 18.02 11.41 17.46Z" stroke="#cbd5ff" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                </i>
+            </div>
+            <div class="single-select">
+                <select name="ram" id="ram" onChange="calcularPrecio();">
+                    <option selected  value="">Memoria RAM</option>
+                    {%for ram in limit_ram %}
+                        <option value="{{ ram }}">{{ ram }} GB</option>
+                    {% endfor %}
+                </select>
+                <i>                    
+                    <svg fill="#cbd5ff" height="24px" width="24px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 60 60" xml:space="preserve" transform="rotate(90)"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M39.145,3.103c-1.244,0.299-2.242,1.296-2.542,2.541c-0.293,1.215,0.051,2.461,0.922,3.331 c0.667,0.667,1.552,1.024,2.476,1.024c0.283,0,0.57-0.033,0.855-0.103c1.244-0.3,2.242-1.297,2.541-2.54 c0.293-1.215-0.052-2.46-0.922-3.331C41.605,3.155,40.361,2.81,39.145,3.103z M41.453,6.889c-0.124,0.513-0.551,0.94-1.065,1.064 C39.846,8.082,39.319,7.94,38.94,7.56c-0.38-0.38-0.522-0.907-0.392-1.448c0.124-0.514,0.552-0.941,1.065-1.064 C39.744,5.016,39.874,5,40.001,5c0.399,0,0.772,0.152,1.06,0.439C41.44,5.819,41.583,6.347,41.453,6.889z"></path> <path d="M36.603,52.644c-0.293,1.215,0.051,2.461,0.922,3.331c0.667,0.667,1.552,1.024,2.476,1.024 c0.283,0,0.57-0.033,0.855-0.103c1.244-0.3,2.242-1.297,2.541-2.54c0.293-1.215-0.052-2.46-0.922-3.331 c-0.87-0.869-2.114-1.214-3.33-0.923C37.901,50.401,36.903,51.398,36.603,52.644z M40.001,52c0.399,0,0.772,0.152,1.06,0.439 c0.379,0.38,0.522,0.907,0.392,1.449c-0.124,0.513-0.551,0.94-1.065,1.064c-0.542,0.127-1.069-0.012-1.448-0.393 c-0.38-0.38-0.522-0.907-0.392-1.448c0.124-0.514,0.552-0.941,1.065-1.064C39.744,52.016,39.874,52,40.001,52z"></path> <path d="M43.405,0H27.5v1c0,1.103-0.897,2-2,2s-2-0.897-2-2V0h-3h-2h-5v5h2v50h-2v5h5h2h3v-1c0-1.103,0.897-2,2-2s2,0.897,2,2v1 h15.905c1.707,0,3.095-1.389,3.095-3.096V3.096C46.5,1.389,45.111,0,43.405,0z M18.5,58h-3v-1h2V3h-2V2h3V58z M44.5,11h-5v2h5v1 h-5v2h5v1h-5v2h5v1h-5v2h5v1h-5v2h5v1h-5v2h5v1h-5v2h5v1h-5v2h5v1h-5v2h5v1h-5v2h5v1h-5v2h5v1h-5v2h5v1h-5v2h5v7.904 c0,0.604-0.491,1.096-1.095,1.096H29.374c-0.445-1.724-2.013-3-3.874-3s-3.428,1.276-3.874,3H20.5V2h1.126 c0.445,1.724,2.013,3,3.874,3s3.428-1.276,3.874-3h14.031C44.009,2,44.5,2.491,44.5,3.096V11z"></path> <path d="M32.5,6h-2v2h-1V6h-2v2h-1V6h-2v2h-2v8h2v2h2v-2h1v2h2v-2h1v2h2v-2h2V8h-2V6z M32.5,14h-8v-4h8V14z"></path> <path d="M32.5,42h-2v2h-1v-2h-2v2h-1v-2h-2v2h-2v8h2v2h2v-2h1v2h2v-2h1v2h2v-2h2v-8h-2V42z M32.5,50h-8v-4h8V50z"></path> <path d="M32.5,24h-2v2h-1v-2h-2v2h-1v-2h-2v2h-2v8h2v2h2v-2h1v2h2v-2h1v2h2v-2h2v-8h-2V24z M32.5,32h-8v-4h8V32z"></path> </g> </g> </g></svg>
+                </i>
+            </div>
+            <div class="single-select">
+                <select name="hdd" id="hdd" onChange="calcularPrecio();">
+                    <option selected  value="">HDD</option>
+                    {%for hdd in limit_hdd %}
+                        <option value="{{ hdd }}">{{ hdd }} GB</option>
+                    {% endfor %}
+                </select>
+                <i>
+                    <svg height="24px" width="24px" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css"> .st0{fill:#cbd5ff;} </style> <g> <path class="st0" d="M497.897,215.708L426.05,105.736c-10.865-16.624-29.389-26.654-49.242-26.654H135.207 c-19.869,0-38.392,10.03-49.258,26.654L14.103,215.708C4.908,229.789,0,246.243,0,263.058v112.877 c0,15.678,6.401,30.032,16.69,40.292c10.259,10.288,24.614,16.697,40.299,16.69h398.022c31.474-0.015,56.975-25.502,56.989-56.982 V263.058C512,246.243,507.092,229.789,497.897,215.708z M41.408,233.544l71.846-109.972c4.834-7.414,13.097-11.878,21.953-11.878 h241.601c8.841,0,17.105,4.464,21.938,11.878l71.862,109.972c1.877,2.876,3.355,5.958,4.641,9.107H36.751 C38.037,239.501,39.515,236.419,41.408,233.544z M479.388,375.935c-0.014,6.786-2.705,12.773-7.14,17.23 c-4.465,4.442-10.452,7.133-17.238,7.14H56.989c-6.786-0.007-12.773-2.698-17.238-7.14c-4.435-4.457-7.126-10.444-7.14-17.23 V263.058c0-0.281,0.059-0.562,0.059-0.842h446.658c0,0.281,0.059,0.562,0.059,0.842V375.935z"></path> <circle class="st0" cx="304.917" cy="332.857" r="21.199"></circle> <circle class="st0" cx="397.859" cy="332.857" r="21.199"></circle> </g> </g></svg>
+                </i>
+            </div>
+          </form>
+          <div class="resultado">
+            <h2 id="resultado-diario"></h2>
+            <h2 id="resultado-mensual"></h2>
+          </div>
+    </main>
+    <footer>
+        <div>
+            <span>© 2023 Webdev. Hecho con 💗 y con </span><a href="https://www.djangoproject.com/" class="django"> django </a>
+        </div>
+        <ul>
+            <li class="ms-3"><a href="https://github.com/brianmrdev"><svg fill="#cbd5ff" xmlns="http://www.w3.org/2000/svg" width="24"
+                height="24" viewBox="0 0 24 24" class="fill-current">
+                <path
+                    d="M12.026 2c-5.509 0-9.974 4.465-9.974 9.974 0 4.406 2.857 8.145 6.821 9.465.499.09.679-.217.679-.481 0-.237-.008-.865-.011-1.696-2.775.602-3.361-1.338-3.361-1.338-.452-1.152-1.107-1.459-1.107-1.459-.905-.619.069-.605.069-.605 1.002.07 1.527 1.028 1.527 1.028.89 1.524 2.336 1.084 2.902.829.091-.645.351-1.085.635-1.334-2.214-.251-4.542-1.107-4.542-4.93 0-1.087.389-1.979 1.024-2.675-.101-.253-.446-1.268.099-2.64 0 0 .837-.269 2.742 1.021a9.582 9.582 0 0 1 2.496-.336 9.554 9.554 0 0 1 2.496.336c1.906-1.291 2.742-1.021 2.742-1.021.545 1.372.203 2.387.099 2.64.64.696 1.024 1.587 1.024 2.675 0 3.833-2.33 4.675-4.552 4.922.355.308.675.916.675 1.846 0 1.334-.012 2.41-.012 2.737 0 .267.178.577.687.479C19.146 20.115 22 16.379 22 11.974 22 6.465 17.535 2 12.026 2z">
+                </path>
+            </svg></a></li>
+            <li class="ms-3"><a href="https://t.me/brianmrdev"><svg fill="#cbd5ff" xmlns="http://www.w3.org/2000/svg" width="24"
+                height="24" viewBox="0 0 24 24" class="fill-current">
+                <path
+                    d="m20.665 3.717-17.73 6.837c-1.21.486-1.203 1.161-.222 1.462l4.552 1.42 10.532-6.645c.498-.303.953-.14.579.192l-8.533 7.701h-.002l.002.001-.314 4.692c.46 0 .663-.211.921-.46l2.211-2.15 4.599 3.397c.848.467 1.457.227 1.668-.785l3.019-14.228c.309-1.239-.473-1.8-1.282-1.434z">
+                </path>
+            </svg></a></li>
+            <li class="ms-3"><a href="https://www.linkedin.com/in/brianmrdev"><svg fill="#cbd5ff" xmlns="http://www.w3.org/2000/svg"
+                width="24" height="24" viewBox="0 0 24 24" class="fill-current">
+                <circle cx="4.983" cy="5.009" r="2.188"></circle>
+                <path
+                    d="M9.237 8.855v12.139h3.769v-6.003c0-1.584.298-3.118 2.262-3.118 1.937 0 1.961 1.811 1.961 3.218v5.904H21v-6.657c0-3.27-.704-5.783-4.526-5.783-1.835 0-3.065 1.007-3.568 1.96h-.051v-1.66H9.237zm-6.142 0H6.87v12.139H3.095z">
+                </path>
+            </svg></a></li>
+        </ul>
+    </footer>
+    
+    <script src="{% static 'js/jquery-3.6.2.min.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+</body>
+</html>
